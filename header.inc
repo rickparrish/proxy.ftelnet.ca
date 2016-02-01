@@ -17,9 +17,11 @@
     
     <script>
         $(document).ready(function () {
-            $('ul.nav li').removeClass('active');
-            var pageId = window.location.pathname.split('/')[1];
-            $('ul.nav li#nav-' + pageId).addClass('active');
+            if ((window.location.pathname != '') && (window.location.pathname != '/')) {
+                $('ul.nav li').removeClass('active');
+                var pageId = window.location.pathname.split('/')[1];
+                $('ul.nav li#nav-' + pageId).addClass('active');
+            }
         });
     </script>
 </head>
