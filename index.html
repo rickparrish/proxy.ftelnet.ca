@@ -14,6 +14,14 @@
     <script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script>$.fn.modal || document.write('<script src="js/bootstrap.min.js"><\/script>')</script>
+    
+    <script>
+        $(document).ready(function () {
+            $('ul.nav li').removeClass('active');
+            var pageId = window.location.pathname.split('/')[1];
+            $('ul.nav li#nav-' + pageId).addClass('active');
+        });
+    </script>
 </head>
 <body>
     <!-- Fixed navbar -->
@@ -30,11 +38,11 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/map">Map</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                    <li><a href="/donate"><strong class="text-warning">Donate</strong></a></li>
+                    <li id="nav-index" class="active"><a href="/">Home</a></li>
+                    <li id="nav-map"><a href="map">Map</a></li>
+                    <li id="nav-about"><a href="about">About</a></li>
+                    <li id="nav-contact"><a href="contact">Contact</a></li>
+                    <li id="nav-donate"><a href="donate"><strong class="text-warning">Donate</strong></a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
