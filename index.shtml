@@ -1,0 +1,34 @@
+﻿<!--#include virtual="header.inc" -->
+
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table id="tblProxyServers" class="table table-striped table-bordered table-hover" style="margin-bottom: 0;">
+                            <thead>
+                                <tr>
+                                    <th colspan="3" class="text-center">Server Information</th>
+                                    <th colspan="5" class="text-center hidden-xs">Uptime Report</th>
+                                </tr>
+                                <tr>
+                                    <th>Location</th>
+                                    <th>Details &nbsp; <a href="#" data-toggle="popover" data-placement="bottom" title="Details" data-content="If you're setting up a local copy of fTelnet with one of these public proxies, the ws: number is the ProxyPort setting, and the wss: number is the ProxyPortSecure setting"><span class="glyphicon glyphicon-info-sign"></span></a></th>
+                                    <th>Ping &nbsp; <a href="#" data-toggle="popover" data-placement="bottom" title="Ping" data-content="Time (in milliseconds) to send a packet to the server and receive a response (so lower is obviously better).  Times marked with an asterisk mean a ping response was not received, so instead it is the time required to create, open and handshake a websocket connection (which will be higher than a ping)."><span class="glyphicon glyphicon-info-sign"></span></a></th>
+                                    <th>Status</th>
+                                    <th class="hidden-xs hidden-sm">1 Day</th>
+                                    <th class="hidden-xs">1 Week</th>
+                                    <th>1 Month</th>
+                                    <th class="hidden-xs">3 Month</th>
+                                    <th class="hidden-xs">6 Month</th>
+                                    <th class="hidden-xs">1 Year</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <script src="js/index.js"></script>
+
+<!--#include virtual="footer.inc" -->

@@ -1,0 +1,2 @@
+Z:\Programming\SHTML2HTML\SHTML2HTML\bin\Release\SHTML2HTML.exe .
+PAUSE

@@ -1,0 +1,36 @@
+﻿<!--#include virtual="header.inc" -->
+
+            <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        About the fTelnet Proxies
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            The proxies listed on this site are meant to be used with <a href="http://my.ftelnet.ca" target="_blank">My fTelnet</a>,
+                            and <a href="http://embed.ftelnet.ca" target="_blank">Embedded fTelnet</a>.
+                        </p>
+                        
+                        <p>
+                            Both of those sites are powered by my HTML5 telnet client <a href="http://www.ftelnet.ca" target="_blank">fTelnet</a>, which
+                            technically is a WebSocket client.  And that technicality poses a technical problem: BBSes don't support the WebSocket protocol!
+                        </p>
+                        
+                        <p>
+                            So the fTelnet Proxies listed on this page are there to take your browsers WebSocket connection and help it talk to a BBSes
+                            telnet connection.  Think of it like a translator helping two people who speak different languages talk to each other.
+                        </p>
+                        
+                        <p>
+                            Are there no proxies located near you?  <a href="/donate">Make a $10 donation</a>, and let me know what location you want, and I'll
+                            add something as close to it as I can get.
+                        </p>
+                        
+                        <p>
+                            If you're not using My fTelnet, or the embedded version of fTelnet, then this site probably isn't of much interest to you.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+<!--#include virtual="footer.inc" -->
