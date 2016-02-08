@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -17,6 +17,11 @@
     
     <script>
         $(document).ready(function () {
+			// Handle HTTP to HTTPS
+			//if ((window.location.protocol === 'http:') && (window.hostname !== 'localhost'))
+			//	window.location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+
+			// Mark the correct page as active
             if ((window.location.pathname != '') && (window.location.pathname != '/')) {
                 $('ul.nav li').removeClass('active');
                 var pageId = window.location.pathname.split('/')[1];

@@ -1,4 +1,4 @@
-﻿<!--#include virtual="template/header.shtml" -->
+﻿<!--#include virtual="template/header.inc" -->
 
             <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
                 <div class="panel panel-default">
@@ -33,4 +33,4 @@
                 </div>
             </div>
 
-<!--#include virtual="template/footer.shtml" -->
+<!--#include virtual="template/footer.inc" -->

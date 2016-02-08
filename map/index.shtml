@@ -1,7 +1,7 @@
-﻿<!--#include virtual="template/header.shtml" -->
+﻿<!--#include virtual="template/header.inc" -->
 
             <div class="col-xs-12">
                 <iframe src="https://mapsengine.google.com/map/u/0/embed?mid=z548azfbQ_rE.ktYR3mGd6bmw" width="100%" height="480"></iframe>
             </div>
 
-<!--#include virtual="template/footer.shtml" -->
+<!--#include virtual="template/footer.inc" -->

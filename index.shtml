@@ -1,4 +1,4 @@
-﻿<!--#include virtual="template/header.shtml" -->
+﻿<!--#include virtual="template/header.inc" -->
 
             <div class="col-xs-12">
                 <div class="panel panel-default">
@@ -31,4 +31,4 @@
             
             <script src="js/index.js"></script>
 
-<!--#include virtual="template/footer.shtml" -->
+<!--#include virtual="template/footer.inc" -->
