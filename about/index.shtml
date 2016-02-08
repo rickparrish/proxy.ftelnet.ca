@@ -1,4 +1,5 @@
-﻿<!--#include virtual="template/header.inc" -->
+﻿<!--#set var="PageTitle" value="About" -->
+<!--#include virtual="template/header.inc" -->
 
             <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
                 <div class="panel panel-default">

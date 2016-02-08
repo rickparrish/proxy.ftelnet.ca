@@ -1,4 +1,5 @@
-﻿<!--#include virtual="template/header.inc" -->
+﻿<!--#set var="PageTitle" value="List" -->
+<!--#include virtual="template/header.inc" -->
 
             <div class="col-xs-12">
                 <div class="panel panel-default">
