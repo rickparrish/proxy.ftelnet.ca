@@ -4,8 +4,8 @@
         "Country": "Australia",
         "City": "Sydney",
         "Hostname": "proxy-au.ftelnet.ca",
-        "WsPort": 8410,
-        "WssPort": 8411,
+        "WsPort": 15001,
+        "WssPort": 15002,
         "UptimeRobotApiKey": "m776347940-41118af8e6b6d24aefec52bc"
     },
     {
