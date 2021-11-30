@@ -7,6 +7,7 @@ var UptimeRobotCustomRatios = [
     {Class: 'hidden-xs', Days: '180'},
     {Class: 'hidden-xs', Days: '365'},
 ];
+var UptimeRobotResponse = null;
 var UptimeRobotStatuses = [];
 UptimeRobotStatuses[0] = {Class: 'text-primary', Text: 'Paused'};
 UptimeRobotStatuses[1] = {Class: 'text-primary', Text: 'Not checked yet'};
@@ -15,8 +16,23 @@ UptimeRobotStatuses[8] = {Class: 'text-danger', Text: 'Seems down'};
 UptimeRobotStatuses[9] = {Class: 'text-danger', Text: 'Down'};
 
 $(document).ready(function () {
-    LoadProxyServers();
-    $('[data-toggle="popover"]').popover();
+    var url = 'https://api.uptimerobot.com/v2/getMonitors';
+    var params = {
+        'api_key': 'ur102810-9516ca7ac2e8ec30ab14b14b',
+        'custom_uptime_ratios': $.map(UptimeRobotCustomRatios, function(val) { return val.Days; }).join('-'),
+    }
+    $.post(url, params, function(data) {
+        if (data.stat = 'ok') {
+            UptimeRobotResponse = data;
+            LoadProxyServers();
+        } else {
+            alert('Error retrieving proxy status.  Please wait a minute and try reloading this page.');
+        }
+    }).fail(function() {
+        alert('Error retrieving proxy status.  Please wait a minute and try reloading this page.');
+    });
+    
+		$('[data-toggle="popover"]').popover();
 });
 
 /*$('#cboProxyServer').change(function () {
@@ -25,49 +41,46 @@ $(document).ready(function () {
     SetSettings(Settings);
 });*/
 
-function GetUptimeRobotStatus(index) {
-    var url = 'https://api.uptimerobot.com/v2/getMonitors';
-    var params = {
-        'api_key': ProxyServers[index].UptimeRobotApiKey,
-        'custom_uptime_ratios': $.map(UptimeRobotCustomRatios, function(val) { return val.Days; }).join('-'),
-    }
-    $.post(url, params, function(data) {
-        if (data.stat = 'ok') {
-			var PingUrl;
-			if (location.protocol === 'https:') {
-				PingUrl = 'wss://' + ProxyServers[index].Hostname + ':' + ProxyServers[index].WssPort;
-			} else {
-				PingUrl = 'ws://' + ProxyServers[index].Hostname + ':' + ProxyServers[index].WsPort;
-			}
-            Ping(PingUrl, function(ms) {
-				var IntegerMS = parseInt(ms);
-				if (isNaN(IntegerMS)) {
-					// Error result like ERROR or TIMEOUT
-					var Class = 'text-danger';
-				} else if (IntegerMS == ms) {
-					// Non-asterisk result, means a ping time
-					var Class = (IntegerMS <= 90 ? 'text-success' : (IntegerMS <= 300 ? 'text-warning' : 'text-danger'));
-				} else {
-					// Asterisk result, means a connection opened time
-	                var Class = (IntegerMS <= 200 ? 'text-success' : (IntegerMS <= 500 ? 'text-warning' : 'text-danger'));
-				}
-                $('#tblProxyServers tbody tr:eq(' + index + ') td:eq(2)').html('<span class="' + Class + '">' + ms + '</span>');
-            });
-            
-            var Status = UptimeRobotStatuses[data.monitors[0].status];
-            $('#tblProxyServers tbody tr:eq(' + index + ') td:eq(3)').html('<span class="' + Status.Class + '">' + Status.Text + '</span>');
-
-            var Uptimes = data.monitors[0].custom_uptime_ratio.split('-');
-            for (var i = 0; i < Uptimes.length; i++) {
-                var Class = (Uptimes[i] >= 99 ? 'text-success' : (Uptimes[i] >= 98 ? 'text-warning' : 'text-danger'));
-                $('#tblProxyServers tbody tr:eq(' + index + ') td:eq(' + (4 + i) + ')').html('<span class="' + Class + '">' + Uptimes[i] + '%</span>');
-            }
+function GetUptimeRobotStatus(rowIndex) {
+    for (var j = 0; j < UptimeRobotResponse.monitors.length; j++) {
+        var monitor = UptimeRobotResponse.monitors[j];
+        if (monitor.url != ProxyServers[rowIndex].Hostname) {
+            continue;
         }
-    });
+        
+        var PingUrl;
+        if (location.protocol === 'https:') {
+            PingUrl = 'wss://' + ProxyServers[rowIndex].Hostname + ':' + ProxyServers[rowIndex].WssPort;
+        } else {
+            PingUrl = 'ws://' + ProxyServers[rowIndex].Hostname + ':' + ProxyServers[rowIndex].WsPort;
+        }
+        Ping(PingUrl, function(ms) {
+            var IntegerMS = parseInt(ms);
+            if (isNaN(IntegerMS)) {
+                // Error result like ERROR or TIMEOUT
+                var Class = 'text-danger';
+            } else if (IntegerMS == ms) {
+                // Non-asterisk result, means a ping time
+                var Class = (IntegerMS <= 90 ? 'text-success' : (IntegerMS <= 300 ? 'text-warning' : 'text-danger'));
+            } else {
+                // Asterisk result, means a connection opened time
+                var Class = (IntegerMS <= 200 ? 'text-success' : (IntegerMS <= 500 ? 'text-warning' : 'text-danger'));
+            }
+            $('#tblProxyServers tbody tr:eq(' + rowIndex + ') td:eq(2)').html('<span class="' + Class + '">' + ms + '</span>');
+        });
+    
+        var Status = UptimeRobotStatuses[monitor.status];
+        $('#tblProxyServers tbody tr:eq(' + rowIndex + ') td:eq(3)').html('<span class="' + Status.Class + '">' + Status.Text + '</span>');
+        var Uptimes = monitor.custom_uptime_ratio.split('-');
+        for (var k = 0; k < Uptimes.length; k++) {
+            var Class = (Uptimes[k] >= 99 ? 'text-success' : (Uptimes[k] >= 98 ? 'text-warning' : 'text-danger'));
+            $('#tblProxyServers tbody tr:eq(' + rowIndex + ') td:eq(' + (4 + k) + ')').html('<span class="' + Class + '">' + Uptimes[k] + '%</span>');
+        }
+    }
 }
 
 function LoadProxyServers() {
-    $.getJSON('proxyservers.json', function(data) {
+    $.getJSON('//proxy.ftelnet.ca/proxyservers.json', function(data) {
         data.sort(function (a, b) {
             var aName = a.Country.toLowerCase() + a.City.toLowerCase();
             var bName = b.Country.toLowerCase() + b.City.toLowerCase(); 
@@ -96,7 +109,7 @@ function LoadProxyServers() {
 }
 
 function Ping(url, cb) {
-	var Connected = false;
+    var Connected = false;
     var ws = new WebSocket(url + '/ping');
     var StartDate = new Date().getTime();
     
@@ -110,11 +123,11 @@ function Ping(url, cb) {
     };
 
     ws.onmessage = function(e) {
-		if (cb != null) {
-			var EndDate = new Date().getTime();
-			cb(EndDate - StartDate);
-			cb = null;
-		}
+        if (cb != null) {
+            var EndDate = new Date().getTime();
+            cb(EndDate - StartDate);
+            cb = null;
+        }
 
         if (ws != null) {
             ws.close();
@@ -124,17 +137,17 @@ function Ping(url, cb) {
 
     ws.onopen = function(e) {
         if (cb == null) {
-	        if (ws != null) {
-	            ws.close();
-	            ws = null;
-	        }
-		} else {
-			// Preliminary result (time to open connection to remote server)
-			var EndDate = new Date().getTime();
-			cb(EndDate - StartDate + '*');
+            if (ws != null) {
+                ws.close();
+                ws = null;
+            }
+        } else {
+            // Preliminary result (time to open connection to remote server)
+            var EndDate = new Date().getTime();
+            cb(EndDate - StartDate + '*');
 
-			// Try for a proper ping result
-			Connected = true; // Prevent setTimeout from setting 'TIMEOUT' if we don't get a proper ping result
+            // Try for a proper ping result
+            Connected = true; // Prevent setTimeout from setting 'TIMEOUT' if we don't get a proper ping result
             StartDate = new Date().getTime();
             ws.send(StartDate + "\r\n");
         }
@@ -142,10 +155,10 @@ function Ping(url, cb) {
     
     setTimeout(function() { 
         if (cb != null) {
-			if (!Connected) {
-	            var EndDate = new Date().getTime();
-	            cb('TIMEOUT');
-			}
+            if (!Connected) {
+                var EndDate = new Date().getTime();
+                cb('TIMEOUT');
+            }
             cb = null;
         }
 
