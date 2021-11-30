@@ -54,10 +54,10 @@ function GetUptimeRobotStatus(index) {
                 $('#tblProxyServers tbody tr:eq(' + index + ') td:eq(2)').html('<span class="' + Class + '">' + ms + '</span>');
             });
             
-            var Status = UptimeRobotStatuses[data.monitors.monitor[0].status];
+            var Status = UptimeRobotStatuses[data.monitors[0].status];
             $('#tblProxyServers tbody tr:eq(' + index + ') td:eq(3)').html('<span class="' + Status.Class + '">' + Status.Text + '</span>');
 
-            var Uptimes = data.monitors.monitor[0].customuptimeratio.split('-');
+            var Uptimes = data.monitors[0].custom_uptime_ratio.split('-');
             for (var i = 0; i < Uptimes.length; i++) {
                 var Class = (Uptimes[i] >= 99 ? 'text-success' : (Uptimes[i] >= 98 ? 'text-warning' : 'text-danger'));
                 $('#tblProxyServers tbody tr:eq(' + index + ') td:eq(' + (4 + i) + ')').html('<span class="' + Class + '">' + Uptimes[i] + '%</span>');
