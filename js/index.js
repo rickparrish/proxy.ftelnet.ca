@@ -26,7 +26,7 @@ $(document).ready(function () {
 });*/
 
 function GetUptimeRobotStatus(index) {
-    $.getJSON('https://api.uptimerobot.com/getMonitors?format=json&noJsonCallback=1&apikey=' + ProxyServers[index].UptimeRobotApiKey + '&customUptimeRatio=' + $.map(UptimeRobotCustomRatios, function(val) { return val.Days; }).join('-'), function(data) {
+    $.postJSON('https://api.uptimerobot.com/v2/getMonitors?format=json&noJsonCallback=1&apikey=' + ProxyServers[index].UptimeRobotApiKey + '&customUptimeRatio=' + $.map(UptimeRobotCustomRatios, function(val) { return val.Days; }).join('-'), function(data) {
         if (data.stat = 'ok') {
 			var PingUrl;
 			if (location.protocol === 'https:') {
