@@ -43,14 +43,5 @@
         "WsPort": 80,
         "WssPort": 443,
         "UptimeRobotApiKey": "m776395380-cb2c7e85b705c5995a31bd21"
-    },
-    {
-        "Continent": "North America",
-        "Country": "United States",
-        "City": "Dallas, TX",
-        "Hostname": "proxy-us-tx.ftelnet.ca",
-        "WsPort": 80,
-        "WssPort": 443,
-        "UptimeRobotApiKey": "m784851687-3fe7afdfcada28d119d529c3"
     }
 ]
