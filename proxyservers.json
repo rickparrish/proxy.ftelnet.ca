@@ -43,5 +43,14 @@
         "WsPort": 80,
         "WssPort": 443,
         "UptimeRobotApiKey": "m776395380-cb2c7e85b705c5995a31bd21"
+    },
+    {
+        "Continent": "North America",
+        "Country": "United States",
+        "City": "Seattle, WA",
+        "Hostname": "proxy-us-wa.ftelnet.ca",
+        "WsPort": 80,
+        "WssPort": 443,
+        "UptimeRobotApiKey": "m790813181-4f41770317add54ad7046471"
     }
 ]
