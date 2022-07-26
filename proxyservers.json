@@ -3,7 +3,7 @@
         "Continent": "Australia",
         "Country": "Australia",
         "City": "Sydney",
-        "Hostname": "proxy-au.ftelnet.ca",
+        "Hostname": "p-au.ftelnet.ca",
         "WsPort": 15001,
         "WssPort": 15002,
         "UptimeRobotApiKey": "m776347940-41118af8e6b6d24aefec52bc"
@@ -12,7 +12,7 @@
         "Continent": "Europe",
         "Country": "Netherlands",
         "City": "Alblasserdam",
-        "Hostname": "proxy-nl.ftelnet.ca",
+        "Hostname": "p-nl.ftelnet.ca",
         "WsPort": 80,
         "WssPort": 443,
         "UptimeRobotApiKey": "m776349071-e70225c0d00b7b2079dfff17"
@@ -21,7 +21,7 @@
         "Continent": "North America",
         "Country": "United States",
         "City": "Los Angeles, CA",
-        "Hostname": "proxy-us-ca.ftelnet.ca",
+        "Hostname": "p-us-ca.ftelnet.ca",
         "WsPort": 80,
         "WssPort": 443,
         "UptimeRobotApiKey": "m776370843-8da1cb0ff04d865ce2dc63aa"
@@ -30,7 +30,7 @@
         "Continent": "North America",
         "Country": "United States",
         "City": "Atlanta, GA",
-        "Hostname": "proxy-us-ga.ftelnet.ca",
+        "Hostname": "p-us-ga.ftelnet.ca",
         "WsPort": 80,
         "WssPort": 443,
         "UptimeRobotApiKey": "m776347937-88162d8a16b2ca0001b91bd8"
@@ -39,7 +39,7 @@
         "Continent": "North America",
         "Country": "United States",
         "City": "Weehawken, NJ",
-        "Hostname": "proxy-us-nj.ftelnet.ca",
+        "Hostname": "p-us-nj.ftelnet.ca",
         "WsPort": 80,
         "WssPort": 443,
         "UptimeRobotApiKey": "m776395380-cb2c7e85b705c5995a31bd21"
@@ -48,7 +48,7 @@
         "Continent": "North America",
         "Country": "United States",
         "City": "Seattle, WA",
-        "Hostname": "proxy-us-wa.ftelnet.ca",
+        "Hostname": "p-us-wa.ftelnet.ca",
         "WsPort": 80,
         "WssPort": 443,
         "UptimeRobotApiKey": "m790813181-4f41770317add54ad7046471"
