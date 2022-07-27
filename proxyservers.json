@@ -29,24 +29,6 @@
     {
         "Continent": "North America",
         "Country": "United States",
-        "City": "Atlanta, GA",
-        "Hostname": "p-us-ga.ftelnet.ca",
-        "WsPort": 80,
-        "WssPort": 443,
-        "UptimeRobotApiKey": "m776347937-88162d8a16b2ca0001b91bd8"
-    },
-    {
-        "Continent": "North America",
-        "Country": "United States",
-        "City": "Weehawken, NJ",
-        "Hostname": "p-us-nj.ftelnet.ca",
-        "WsPort": 80,
-        "WssPort": 443,
-        "UptimeRobotApiKey": "m776395380-cb2c7e85b705c5995a31bd21"
-    },
-    {
-        "Continent": "North America",
-        "Country": "United States",
         "City": "Vint Hill, Virginia",
         "Hostname": "p-us-va.ftelnet.ca",
         "WsPort": 80,
