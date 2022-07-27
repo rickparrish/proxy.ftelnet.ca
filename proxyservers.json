@@ -18,6 +18,15 @@
         "UptimeRobotApiKey": "m776349071-e70225c0d00b7b2079dfff17"
     },
     {
+        "Continent": "Europe",
+        "Country": "United Kingdom",
+        "City": "London",
+        "Hostname": "p-uk.ftelnet.ca",
+        "WsPort": 80,
+        "WssPort": 443,
+        "UptimeRobotApiKey": "m792349208-c308e68924d0e6d571fe7061"
+    },
+    {
         "Continent": "North America",
         "Country": "United States",
         "City": "Vint Hill, Virginia",
