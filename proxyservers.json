@@ -20,15 +20,6 @@
     {
         "Continent": "North America",
         "Country": "United States",
-        "City": "Los Angeles, CA",
-        "Hostname": "p-us-ca.ftelnet.ca",
-        "WsPort": 80,
-        "WssPort": 443,
-        "UptimeRobotApiKey": "m776370843-8da1cb0ff04d865ce2dc63aa"
-    },
-    {
-        "Continent": "North America",
-        "Country": "United States",
         "City": "Vint Hill, Virginia",
         "Hostname": "p-us-va.ftelnet.ca",
         "WsPort": 80,
