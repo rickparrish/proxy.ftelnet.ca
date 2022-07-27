@@ -10,15 +10,6 @@
     },
     {
         "Continent": "Europe",
-        "Country": "Netherlands",
-        "City": "Alblasserdam",
-        "Hostname": "p-nl.ftelnet.ca",
-        "WsPort": 80,
-        "WssPort": 443,
-        "UptimeRobotApiKey": "m776349071-e70225c0d00b7b2079dfff17"
-    },
-    {
-        "Continent": "Europe",
         "Country": "United Kingdom",
         "City": "London",
         "Hostname": "p-uk.ftelnet.ca",
