@@ -1,4 +1,3 @@
-var ProxyServers = [];
 var UptimeRobotCustomRatios = [
     {Class: 'hidden-xs hidden-sm', Days: '1'},
     {Class: 'hidden-xs', Days: '7'},
@@ -41,18 +40,18 @@ $(document).ready(function () {
     SetSettings(Settings);
 });*/
 
-function GetUptimeRobotStatus(rowIndex) {
+function GetUptimeRobotStatus(rowIndex, hostname, wsPort, wssPort) {
     for (var j = 0; j < UptimeRobotResponse.monitors.length; j++) {
         var monitor = UptimeRobotResponse.monitors[j];
-        if (monitor.url != ProxyServers[rowIndex].Hostname) {
+        if (monitor.url != hostname) {
             continue;
         }
         
         var PingUrl;
         if (location.protocol === 'https:') {
-            PingUrl = 'wss://' + ProxyServers[rowIndex].Hostname + ':' + ProxyServers[rowIndex].WssPort;
+            PingUrl = 'wss://' + hostname + ':' + wssPort;
         } else {
-            PingUrl = 'ws://' + ProxyServers[rowIndex].Hostname + ':' + ProxyServers[rowIndex].WsPort;
+            PingUrl = 'ws://' + hostname + ':' + wsPort;
         }
         Ping(PingUrl, function(ms) {
             var IntegerMS = parseInt(ms);
@@ -80,30 +79,29 @@ function GetUptimeRobotStatus(rowIndex) {
 }
 
 function LoadProxyServers() {
-    $.getJSON('//proxy.ftelnet.ca/proxyservers.json', function(data) {
-        data.sort(function (a, b) {
-            var aName = a.Country.toLowerCase() + a.City.toLowerCase();
-            var bName = b.Country.toLowerCase() + b.City.toLowerCase(); 
-            return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0)); 
-        });
-        ProxyServers = data;
-
-        for (var i = 0; i < ProxyServers.length; i++) {
-            var NewRow = '<tr>';
-            NewRow += ' <td>' + ProxyServers[i].Country + '<br />' + ProxyServers[i].City + '</td>';
-            NewRow += ' <td>' + ProxyServers[i].Hostname + '<br />';
-            NewRow += '<a href="http://embed.ftelnet.ca/?Hostname=bbs.ftelnet.ca&Port=23&Proxy=' + ProxyServers[i].Hostname + '&ProxyPort=' + ProxyServers[i].WsPort + '&ProxyPortSecure=' + ProxyServers[i].WssPort + '&AutoConnect=false" target="_blank" style="text-decoration: none;">ws:' + ProxyServers[i].WsPort + '</a>,';
-            NewRow += '&nbsp;<a href="https://embed.ftelnet.ca/?Hostname=bbs.ftelnet.ca&Port=23&Proxy=' + ProxyServers[i].Hostname + '&ProxyPort=' + ProxyServers[i].WsPort + '&ProxyPortSecure=' + ProxyServers[i].WssPort + '&AutoConnect=false" target="_blank" style="text-decoration: none;">wss:' + ProxyServers[i].WssPort + '</a>';
-            NewRow += ' </td>';
-            NewRow += ' <td>...</td>'; // Ping
-            NewRow += ' <td>...</td>'; // Status
-            for (var j = 0; j < UptimeRobotCustomRatios.length; j++) {
-                NewRow += ' <td class="' + UptimeRobotCustomRatios[j].Class + '">...</td>'; // Uptime intervals
+    $.getJSON('//embed-v2.ftelnet.ca/proxy-servers.json', function(data) {
+        var rowCount = 0;
+        for (key in data) {
+            // Only process if the server has a Hostname property.  Some are only CNAMEs that redirect to real servers, and we don't want to list those
+            var server = data[key];
+            if (server['Hostname']) {
+                var NewRow = '<tr>';
+                NewRow += ' <td>' + server.Country + '<br />' + server.City + '</td>';
+                NewRow += ' <td>' + server.Hostname + '<br />';
+                NewRow += '<a href="http://embed.ftelnet.ca/?Hostname=bbs.ftelnet.ca&Port=23&Proxy=' + server.Hostname + '&ProxyPort=' + server.WsPort + '&ProxyPortSecure=' + server.WssPort + '&AutoConnect=false" target="_blank" style="text-decoration: none;">ws:' + server.WsPort + '</a>,';
+                NewRow += '&nbsp;<a href="https://embed.ftelnet.ca/?Hostname=bbs.ftelnet.ca&Port=23&Proxy=' + server.Hostname + '&ProxyPort=' + server.WsPort + '&ProxyPortSecure=' + server.WssPort + '&AutoConnect=false" target="_blank" style="text-decoration: none;">wss:' + server.WssPort + '</a>';
+                NewRow += ' </td>';
+                NewRow += ' <td>...</td>'; // Ping
+                NewRow += ' <td>...</td>'; // Status
+                for (var j = 0; j < UptimeRobotCustomRatios.length; j++) {
+                    NewRow += ' <td class="' + UptimeRobotCustomRatios[j].Class + '">...</td>'; // Uptime intervals
+                }
+                NewRow += '</tr>';
+                $('#tblProxyServers tbody').append(NewRow);
+                
+                GetUptimeRobotStatus(rowCount, server.Hostname, server.WsPort, server.WssPort);
+                rowCount += 1;
             }
-            NewRow += '</tr>';
-            $('#tblProxyServers tbody').append(NewRow);
-            
-            GetUptimeRobotStatus(i);
         }
     });
 }
