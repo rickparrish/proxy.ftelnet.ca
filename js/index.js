@@ -85,11 +85,13 @@ function LoadProxyServers() {
             // Only process if the server has a Hostname property.  Some are only CNAMEs that redirect to real servers, and we don't want to list those
             var server = data[key];
             if (server['Hostname']) {
+                var proxyUrl = '//embed-v2.ftelnet.ca/connect/?BareLFtoCRLF=false&BitsPerSecond=57600&ConnectionType=telnet&Emulation=ansi-bbs&Enter=\\r&Font=CP437&ForceWss=false&Hostname=bbs.ftelnet.ca&LocalEcho=false&NegotiateLocalEcho=true&Port=23&ProxyHostname=' + server.Hostname + '&ProxyPort=' + server.WsPort + '&ProxyPortSecure=' + server.WssPort + '&ScreenColumns=80&ScreenRows=25&SendLocation=true';
+                
                 var NewRow = '<tr>';
                 NewRow += ' <td>' + server.Country + '<br />' + server.City + '</td>';
                 NewRow += ' <td>' + server.Hostname + '<br />';
-                NewRow += '<a href="http://embed.ftelnet.ca/?Hostname=bbs.ftelnet.ca&Port=23&Proxy=' + server.Hostname + '&ProxyPort=' + server.WsPort + '&ProxyPortSecure=' + server.WssPort + '&AutoConnect=false" target="_blank" style="text-decoration: none;">ws:' + server.WsPort + '</a>,';
-                NewRow += '&nbsp;<a href="https://embed.ftelnet.ca/?Hostname=bbs.ftelnet.ca&Port=23&Proxy=' + server.Hostname + '&ProxyPort=' + server.WsPort + '&ProxyPortSecure=' + server.WssPort + '&AutoConnect=false" target="_blank" style="text-decoration: none;">wss:' + server.WssPort + '</a>';
+                NewRow += '<a href="http:' + proxyUrl + '" target="_blank" style="text-decoration: none;">ws:' + server.WsPort + '</a>,';
+                NewRow += '&nbsp;<a href="https:' + proxyUrl + '" target="_blank" style="text-decoration: none;">wss:' + server.WssPort + '</a>';
                 NewRow += ' </td>';
                 NewRow += ' <td>...</td>'; // Ping
                 NewRow += ' <td>...</td>'; // Status
